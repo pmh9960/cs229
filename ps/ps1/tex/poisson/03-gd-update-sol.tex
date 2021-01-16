@@ -1,2 +1,19 @@
 \begin{answer}
+\begin{align*}
+    p(y;\eta) = \frac{1}{y!}\cdot\exp(\eta y - e^\eta)
+\end{align*}
+
+GLM means $\eta = \theta^T x$.
+
+\begin{align*}
+    p(y^{(i)}\mid x^{(i)};\theta) &= p(y^{(i)}; \theta^T x^{(i)}) = \frac{1}{y!}\cdot\exp(\theta^T x^{(i)} y^{(i)} - e^{\theta^T x^{(i)}}) \\
+    l(\theta) &= \log{p(y^{(i)}\mid x^{(i)};\theta)} = \log{\frac{1}{y!}} + \theta^T x^{(i)} y^{(i)} - e^{\theta^T x^{(i)}} \\
+    \frac{\partial}{\partial\theta_j} l(\theta) &= x^{(i)}_j y^{(i)} - x^{(i)}_j e^{\theta^T x^{(i)}} = (y^{(i)} - e^{\theta^T x^{(i)}})x^{(i)}_j 
+\end{align*}
+
+Stochastic Gradient Ascent update rule is represented as
+\begin{align*}
+    \theta_j := \theta_j + \alpha(y^{(i)} - e^{\theta^T x^{(i)}})x^{(i)}_j 
+\end{align*}
+
 \end{answer}

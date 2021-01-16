@@ -1,2 +1,10 @@
 \begin{answer}
+\begin{align*}
+    \frac{\partial}{\partial\eta}\left(\frac{\partial}{\partial\eta}a(\eta)\right) &= \frac{\partial}{\partial\eta} \mathbb{E}[Y;\eta] \\
+    &= \frac{\partial}{\partial\eta} \int y\,b(y)\exp(\eta\,y - a(\eta))\,dy \\
+    &= \int y\,b(y)\exp(\eta\,y - a(\eta))\cdot \left(y - \frac{\partial}{\partial\eta}a(\eta)\right)\,dy \\
+    &= \int y^2\,b(y)\exp(\eta\,y - a(\eta))\,dy - \frac{\partial}{\partial\eta}a(\eta)\int y\,b(y)\exp(\eta\,y - a(\eta))\,dy \\
+    &= \mathbb{E}[Y^2;\eta] - \mathbb{E}[Y;\eta]\cdot\mathbb{E}[Y;\eta] \\
+    &= \textrm{Var}[Y;\eta]
+\end{align*}
 \end{answer}

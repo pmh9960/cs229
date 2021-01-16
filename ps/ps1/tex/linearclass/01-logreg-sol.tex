@@ -1,2 +1,118 @@
 \begin{answer}
+Hessian matrix is defined as,
+
+$$
+\begin{aligned}
+H(f) &= 
+\begin{bmatrix} 
+    {\partial^2 f \over {\partial x_1}^2} & {\partial^2 f \over {\partial x_1\partial x_2}} & \cdots & {\partial^2 f \over {\partial x_1\partial x_n}}\\
+    {\partial^2 f \over {\partial x_2 \partial x_1}} & \ddots & & \vdots \\
+    \vdots & & \ddots & \vdots\\
+    {\partial^2 f \over {\partial x_n \partial x_1}} & \cdots & & {\partial^2 f \over {\partial x_n}^2}
+\end{bmatrix} \\
+H(J) &=
+\begin{bmatrix} 
+    {\partial^2 J \over {\partial \theta_1}^2} &  {\partial^2 J \over {\partial \theta_1\partial \theta_2}}\\
+    {\partial^2 J \over {\partial \theta_2 \partial \theta_1}} & {\partial^2 J \over {\partial \theta_2}^2} \\
+\end{bmatrix}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+{\partial J \over {\partial \theta_1}} 
+&= {\partial \over {\partial \theta_1}} \left( 
+- {1 \over n} \sum_{i=1}^n \left( y^{(i)}\log({1 \over {1 + e^{-(\theta_1 x_1^{(i)} + \theta_2 x_2^{(i)})}}}) 
++ (1-y^{(i)}) \log({e^{-(\theta_1 x_1^{(i)} + \theta_2 x_2^{(i)})} \over {1 + e^{-(\theta_1 x_1^{(i)} + \theta_2 x_2^{(i)})}}})\right) \right) \\
+&=  - {1 \over n} \sum_{i=1}^n \left( 
+y^{(i)} {x_1^{(i)} e^{-(\theta_1 x_1^{(i)} + \theta_2 x_2^{(i)})} \over {1 + e^{-(\theta_1 x_1^{(i)} + \theta_2 x_2^{(i)})}}} 
+- (1-y^{(i)}) {x_1^{(i)} e^{(\theta_1 x_1^{(i)} + \theta_2 x_2^{(i)})} \over {1 + e^{(\theta_1 x_1^{(i)} + \theta_2 x_2^{(i)})}}}
+\right) \\
+&=  - {1 \over n} \sum_{i=1}^n \left( 
+y^{(i)} {x_1^{(i)} \over {1 + e^{\theta^T x^{(i)}}}} 
+- (1-y^{(i)}) {x_1^{(i)} \over {1 + e^{-\theta^T x^{(i)}}}}
+\right) \\
+{\partial J \over {\partial \theta_2}} 
+&= - {1 \over n} \sum_{i=1}^n \left( 
+y^{(i)} {x_2^{(i)} \over {1 + e^{\theta^T x^{(i)}}}} 
+- (1-y^{(i)}) {x_2^{(i)} \over {1 + e^{-\theta^T x^{(i)}}}}
+\right) \\
+\end{aligned}
+$$
+
+Let $\sigma := 1/(1 + e^{-\theta^T x^{(i)}})$ then the equations are simplified as,
+
+$$
+\begin{aligned}
+{\partial J \over {\partial \theta_1}} 
+&= - {1 \over n} \sum_{i=1}^n \left( 
+y^{(i)} x_1^{(i)} (1 - \sigma)
+- (1-y^{(i)}) x_1^{(i)} \sigma
+\right) 
+= - {1 \over n} \sum_{i=1}^n x_1^{(i)} \left(
+y^{(i)} - \sigma
+\right) \\
+{\partial J \over {\partial \theta_2}} 
+&= - {1 \over n} \sum_{i=1}^n \left( 
+y^{(i)} x_2^{(i)} (1 - \sigma)
+- (1-y^{(i)}) x_2^{(i)} \sigma
+\right) 
+= - {1 \over n} \sum_{i=1}^n x_2^{(i)} \left(
+y^{(i)} - \sigma
+\right) \\
+{\partial^2 J \over {\partial \theta_1}^2} 
+&= {1 \over n} \sum_{i=1}^n \left( 
+(x_1^{(i)})^2 \sigma (1-\sigma)
+\right) \\
+{\partial^2 J \over {\partial \theta_1\partial \theta_2}} 
+&= {1 \over n} \sum_{i=1}^n \left( 
+(x_1^{(i)}x_2^{(i)}) \sigma (1-\sigma)
+\right) \\
+{\partial^2 J \over {\partial \theta_2 \partial \theta_1}} 
+&= {1 \over n} \sum_{i=1}^n \left( 
+(x_1^{(i)}x_2^{(i)}) \sigma (1-\sigma)
+\right) \\
+{\partial^2 J \over {\partial \theta_2}^2}
+&= {1 \over n} \sum_{i=1}^n \left( 
+(x_2^{(i)})^2 \sigma (1-\sigma)
+\right) \\
+\end{aligned}
+$$
+
+Finally, the Hessian matrix $H$ represents as,
+
+$$
+H = {1 \over n}
+\begin{bmatrix}
+    \sum_{i=1}^n \sigma (1-\sigma) ((x_1^{(i)})^2) & \sum_{i=1}^n \sigma (1-\sigma) (x_1^{(i)}x_2^{(i)}) \\
+    \sum_{i=1}^n \sigma (1-\sigma) (x_1^{(i)}x_2^{(i)}) & \sum_{i=1}^n \sigma (1-\sigma) ((x_2^{(i)})^2) \\
+\end{bmatrix}.
+$$
+
+Now, prove $z^T H z \geq 0$.
+
+$$
+\begin{aligned}
+z^T H z &=
+\begin{bmatrix}
+    z_1 & z_2 \\
+\end{bmatrix}
+H
+\begin{bmatrix}
+    z_1 \\
+    z_2 \\
+\end{bmatrix} \\
+&= {1 \over n} 
+\begin{bmatrix}
+    z_1 & z_2 \\
+\end{bmatrix}
+\begin{bmatrix}
+    \sum_{i=1}^n \sigma (1-\sigma) z_1 (x_1^{(i)})^2 + z_2 (x_1^{(i)}x_2^{(i)}) \\
+    \sum_{i=1}^n \sigma (1-\sigma) z_1 (x_1^{(i)}x_2^{(i)}) + z_2 (x_2^{(i)})^2 \\
+\end{bmatrix} \\
+&= {1 \over n}
+\sum_{i=1}^n \sigma (1-\sigma) \left( z_1^2 (x_1^{(i)})^2 + 2 z_1 z_2 (x_1^{(i)}x_2^{(i)}) + z_2^2 (x_2^{(i)})^2 \right) \\
+&= {1 \over n} \sum_{i=1}^n \sigma (1-\sigma) \left( z_1 x_1^{(i)}+ z_2 x_2^{(i)} \right)^2 \geq 0.
+\end{aligned}
+$$
 \end{answer}

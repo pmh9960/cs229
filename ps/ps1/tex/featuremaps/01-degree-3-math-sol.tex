@@ -1,2 +1,21 @@
 \begin{answer}
+
+1) $h_\theta (\hat{x}) = \theta^T \hat{x}$
+\begin{align*}
+    J(\theta) &= \frac{1}{2n}\sum_{i=1}^{n} \left(h_\theta (\hat{x}^{(i)}) - y^{(i)}\right)^2 \\
+    &= \frac{1}{2n}\sum_{i=1}^{n} \left(\theta^T \hat{x}^{(i)} - y^{(i)}\right)^2
+\end{align*}
+
+2) Minimize $J(\theta)$ using batch gradient descent.
+
+\begin{align*}
+    \frac{\partial}{\partial\theta_j}J(\theta) = \frac{1}{n}\sum_{i=1}^{n} \left(\theta^T \hat{x}^{(i)} - y^{(i)}\right)\hat{x}^{(i)}_j 
+\end{align*}
+
+Update $\theta_j$:
+
+\begin{align*}
+    \theta_j := \theta_j - \alpha \cdot \frac{1}{n}\sum_{i=1}^{n} \left(\theta^T \hat{x}^{(i)} - y^{(i)}\right)\hat{x}^{(i)}_j 
+\end{align*}
+
 \end{answer}

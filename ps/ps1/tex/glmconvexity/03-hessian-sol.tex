@@ -1,2 +1,53 @@
 \begin{answer}
+Negative Log Likelihood is represented as
+
+\begin{align*}
+    l(\theta) = -\log{p(y;\eta)}\vert_{\eta=\theta^T x} = -\log{b(y)}-\eta y + a(\eta)\vert_{\eta=\theta^T x}
+\end{align*}
+
+Note that $\eta = \theta^T x$, $\frac{\partial\eta}{\partial\theta_i} = x_i$.
+
+\begin{align*}
+    \frac{\partial}{\partial\theta_i}l(\theta) &= -\frac{\partial\eta}{\partial\theta_i}y + \frac{\partial}{\partial\eta}a(\eta)\cdot\frac{\partial\eta}{\partial\theta_i} \\
+    &= \left(\frac{\partial}{\partial\eta}a(\eta) - y\right)x_i \\
+    \frac{\partial}{\partial\theta_i}\frac{\partial}{\partial\theta_j}l(\theta) &= \frac{\partial}{\partial\theta_j} \left(\frac{\partial}{\partial\eta}a(\eta) - y\right)x_i \\
+    &= \frac{\partial^2}{{\partial\eta}^2}a(\eta)x_i x_j \\
+    &= \mathrm{Var}[Y;\eta]x_i x_j = H_{ij}
+\end{align*}
+
+Positive Semi-Definite (PSD): $H$ is PSD if
+
+\begin{align*}
+    \forall z \in \mathbb{R}^n, ~~ z^T H z \geq 0.
+\end{align*}
+
+Let 
+\begin{align*}
+    &H \text{ is } n\times n \text{ matrix }, \\
+    &x = \begin{bmatrix}x_1 & x_2 & \cdots & x_n\end{bmatrix}^T, \\
+    &z = \begin{bmatrix}z_1 & z_2 & \cdots & z_n\end{bmatrix}^T, \\
+    &H' = \frac{1}{\mathrm{Var}[Y;\eta]} H
+\end{align*}
+
+To simplify matrix, use $H'$.
+
+\begin{align*}
+    &z^T H z = \mathrm{Var}[Y;\eta] z^T H' z \\
+    &\text{then } z^T H z \geq 0 \Leftrightarrow z^T H' z \geq 0 ~~ \because \mathrm{Var}[Y;\eta] \geq 0
+\end{align*}
+
+Now calculate $z^T H' z$.
+
+\begin{align*}
+    (H'z)_j &= \sum_{i=1}^n H_{ji} z_i = \sum_{i=1}^n x_j x_i z_i \\
+    z^T(H'z) &= \sum_{j=1}^n z_j (H' z)_j = \sum_{j=1}^n \sum_{i=1}^n z_j x_j x_i z_i \\
+    &= \sum_{j=1}^n z_j x_j \sum_{i=1}^n x_i z_i = (x^T z)^2 \geq 0.
+\end{align*}
+
+$\therefore z^T H' z \geq 0$ and also $z^T H z \geq 0$.
+
+$\therefore H$ is PSD
+
+$\therefore$ NLL loss of GLM is convex.
+
 \end{answer}

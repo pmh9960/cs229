@@ -1,2 +1,28 @@
 \begin{answer}
+
+\begin{align*}
+    \mathbb{E}[Y;\eta] &= \int y\,p(y;\eta)\,dy \\
+    \frac{\partial}{\partial\eta}\int p(y;\eta)\,dy &= \int \frac{\partial}{\partial\eta} p(y;\eta)\,dy \\
+    &= \int b(y)\exp(\eta\,y - a(\eta))\cdot \left(y - \frac{\partial}{\partial\eta}a(\eta)\right)\,dy
+\end{align*}
+
+Note that
+
+\begin{align*}
+    &\int p(y;\eta)\,dy = 1 \\
+    &\frac{\partial}{\partial\eta}\int p(y;\eta)\,dy = 0 \\
+    &\int b(y)\exp(\eta\,y - a(\eta))\cdot \left(y - \frac{\partial}{\partial\eta}a(\eta)\right)\,dy = 0
+\end{align*}
+
+Therefore
+
+\begin{align*}
+    \mathbb{E}[Y;\eta] &= \int y\,p(y;\eta)\,dy \\
+    &= \int y\,b(y)\exp(\eta\,y - a(\eta))\,dy \\
+    &= \int b(y)\exp(\eta\,y - a(\eta))\cdot \frac{\partial}{\partial\eta}a(\eta)\,dy \\
+    &= \frac{\partial}{\partial\eta}a(\eta) \int b(y)\exp(\eta\,y - a(\eta))\,dy \\
+    &= \frac{\partial}{\partial\eta}a(\eta) \int p(y;\eta)\,dy \\
+    &= \frac{\partial}{\partial\eta}a(\eta)
+\end{align*}
+
 \end{answer}

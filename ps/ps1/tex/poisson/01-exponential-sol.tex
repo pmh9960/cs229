@@ -1,2 +1,16 @@
 \begin{answer}
+PDF of Exponential family is $p(y;\eta) = b(y)\exp(\eta^T T(y) - a(\eta))$
+\begin{align*}
+    p(y;\eta) &= \frac{e^{-\lambda}\lambda^y}{y!} \\
+    &= \exp\left(\log\left(\frac{e^{-\lambda}\lambda^y}{y!}\right)\right) \\
+    &= \frac{1}{y!}\,\exp(y\log{\lambda}-\lambda) \\
+\end{align*}
+
+\begin{align*}
+    b(y) &= \frac{1}{y!} \\
+    \eta &= \log{\lambda} \\
+    T(y) &= y \\
+    a(\eta) &= \lambda = e^\eta \\
+\end{align*}
+
 \end{answer}

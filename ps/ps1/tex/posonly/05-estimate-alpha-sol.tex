@@ -1,2 +1,51 @@
 \begin{answer}
+We assume a function $h(x)$ that
+\begin{align*}
+    h(x^{(i)}) = p(y^{(i)}=1\mid x^{(i)})
+\end{align*}
+
+The expectation of $h(x^{(i)})$ given $y^{(i)}=1$ is represented as
+
+\begin{align*}
+    \mathbb{E}[h(x^{(i)})\mid y^{(i)}=1] &= \int h(x^{(i)})\,p(x^{(i)}\mid y^{(i)}=1)\,dx^{(i)} \\
+    &= \int p(y^{(i)}=1\mid x^{(i)})\,p(x^{(i)}\mid y^{(i)}=1)\,dx^{(i)} \\
+    &= \int p^2(y^{(i)}=1\mid x^{(i)})\,\frac{p(x^{(i)})}{p(y^{(i)}=1)}\,dx^{(i)} \\
+\end{align*}
+
+Using property of sub-question (d) that $p(y^{(i)}=1\mid x^{(i)}) = \alpha\,p(t^{(i)}=1\mid x^{(i)})$.
+
+\begin{align*}
+    \mathbb{E}[h(x^{(i)})\mid y^{(i)}=1] &= \int \alpha^2\,p^2(t^{(i)}=1\mid x^{(i)})\,\frac{p(x^{(i)})}{p(y^{(i)}=1)}\,dx^{(i)}
+\end{align*}
+
+Using crucial assumption that $p(t^{(i)}=1\mid x^{(i)})\in\{0,1\}$, we can simplify that
+
+\begin{align*}
+    p^2(t^{(i)}=1\mid x^{(i)})=p(t^{(i)}=1\mid x^{(i)})
+\end{align*}
+
+Now, we can use Bayes rule and definition of marginal probability.
+
+\begin{align*}
+    \mathbb{E}[h(x^{(i)})\mid y^{(i)}=1] &= \int \alpha^2\,p^2(t^{(i)}=1\mid x^{(i)})\,\frac{p(x^{(i)})}{p(y^{(i)}=1)}\,dx^{(i)} \\
+    &= \int \alpha^2\,p(t^{(i)}=1\mid x^{(i)})\,\frac{p(x^{(i)})}{p(y^{(i)}=1)}\,dx^{(i)} \\
+    &= \frac{\alpha^2}{p(y^{(i)}=1)}\,\int p(t^{(i)}=1, x^{(i)})\,dx^{(i)} \\
+    &= \alpha^2\,\frac{p(t^{(i)}=1)}{p(y^{(i)}=1)} \\
+\end{align*}
+
+We can get ${p(t^{(i)}=1)}/{p(y^{(i)}=1)}$ from $p(t^{(i)}=1\mid x^{(i)}) = \frac{1}{\alpha}\,p(y^{(i)}=1\mid x^{(i)})$.
+
+\begin{align*}
+    p(t^{(i)}=1\mid x^{(i)}) &= \frac{1}{\alpha}\,p(y^{(i)}=1\mid x^{(i)}) \\
+    p(t^{(i)}=1\mid x^{(i)})\,p(x^{(i)}) &= \frac{1}{\alpha}\,p(y^{(i)}=1\mid x^{(i)})\,p(x^{(i)}) \\
+    \int p(t^{(i)}=1\mid x^{(i)})\,p(x^{(i)})\,dx^{(i)} &= \int \frac{1}{\alpha}\,p(y^{(i)}=1\mid x^{(i)})\,p(x^{(i)})\,dx^{(i)} \\
+    p(t^{(i)}=1)&=\frac{1}{\alpha}\,p(y^{(i)}=1)
+\end{align*}
+
+Therefore, the expectation of $h(x^{(i)})$ given $y^{(i)}=1$ is written as $\alpha$
+
+\begin{align*}
+    \mathbb{E}[h(x^{(i)})\mid y^{(i)}=1] = \alpha
+\end{align*}
+
 \end{answer}
