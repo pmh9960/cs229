@@ -1,2 +1,44 @@
 \begin{answer}
+\begin{align*}
+    p(y=1\mid x;\phi,\mu_{0},\mu_{1},\Sigma) &= 
+    \frac{p(x\mid y=1;\phi,\mu_{0},\mu_{1},\Sigma)\,p(y=1;\phi,\mu_{0},\mu_{1},\Sigma)}
+    {p(x;\phi,\mu_{0},\mu_{1},\Sigma)} \\
+    &= \frac{p(x\mid y=1)p(y=1)}
+    {p(x\mid y=1)p(y=1) + p(x\mid y=0)p(y=0)}
+\end{align*}
+
+We have to show above equation with respect to $\phi,\mu_{0},\mu_{1},\Sigma$.
+
+\begin{align*}
+    (x-\mu_{0})^T \Sigma^{-1} (x-\mu_{0}) =& \sum_{i=1}^n\sum_{j=1}^n \Sigma^{-1}_{ij}(x-\mu_{0})_i (x-\mu_{0})_j \\
+    (x-\mu_{1})^T \Sigma^{-1} (x-\mu_{1}) =& \sum_{i=1}^n\sum_{j=1}^n \Sigma^{-1}_{ij}(x-\mu_{1})_i (x-\mu_{1})_j \\
+    \textrm{(1st eq.) - (2nd eq.)}
+    =& (x-\mu_{0})^T \Sigma^{-1} (x-\mu_{0}) - (x-\mu_{1})^T \Sigma^{-1} (x-\mu_{1}) \\ 
+    =& \sum_{i=1}^n\sum_{j=1}^n \Sigma^{-1}_{ij}\left((x-\mu_{0})_i (x-\mu_{0})_j - (x-\mu_{1})_i (x-\mu_{1})_j\right)\\
+    =& \sum_{i=1}^n\sum_{j=1}^n \Sigma^{-1}_{ij}\left(- x_{i}\mu_{0j} - x_{j}\mu_{0i} + \mu_{0i}\mu_{0j} + x_{i}\mu_{1j} + x_{j}\mu_{1i} - \mu_{1i}\mu_{1j}\right) \\
+    =& \sum_{i=1}^n\sum_{j=1}^n \Sigma^{-1}_{ij}\left(x_{i}(\mu_{1}-\mu_{0})_{j} + x_{j}(\mu_{1}-\mu_{0})_{i} + \mu_{0i}\mu_{0j} - \mu_{1i}\mu_{1j}\right)\\
+    =& \sum_{i=1}^n x_{i}\sum_{j=1}^n \Sigma^{-1}_{ij}(\mu_{1}-\mu_{0})_{j} \\
+    &+ \sum_{j=1}^n x_{j}\sum_{i=1}^n \Sigma^{-1}_{ij} (\mu_{1}-\mu_{0})_{i} \\
+    &+ \sum_{i=1}^n \sum_{j=1}^n \Sigma^{-1}_{ij} (\mu_{0i}\mu_{0j} - \mu_{1i}\mu_{1j}) \\
+    =& 2\sum_{i=1}^n x_{i} (\Sigma^{-1} \cdot (\mu_{1} - \mu_{0}))_{i} + 2\theta_{0}' \quad \because \Sigma\textrm{ and }\Sigma^{-1}\textrm{ are symmetric} \\
+    =& 2x\cdot \theta + 2\theta_{0}' \\
+    \therefore \frac{p(x\mid y=0)}{p(x\mid y=1)} =& \exp\left(-\frac{1}{2}(x-\mu_{0})^T \Sigma^{-1} (x-\mu_{0}) + \frac{1}{2}(x-\mu_{1})^T \Sigma^{-1} (x-\mu_{1})\right) \\
+    =& \exp\left(-(\theta^T x + \theta_{0}')\right)
+\end{align*}
+
+Therefore the posterior probability is represented as
+
+\begin{align*}
+    p(y=1\mid x) =& \frac{\phi}{\phi + (1 - \phi)\exp(-(\theta^T x + \theta_{0}'))} \\
+    =& \frac{1}{1 + \exp(\log{\frac{1 - \phi}{\phi}}-(\theta^T x + \theta_{0}'))} \\
+    =& \frac{1}{1 + \exp(-(\theta^T x + \theta_{0}))} \\
+\end{align*}
+
+where
+
+\begin{align*}
+    \theta =& \Sigma^{-1} (\mu_{1} - \mu_{0}) \\
+    \theta_{0} =& \frac{1}{2}\mu_{0}^T\Sigma^{-1}\mu_{0} - \frac{1}{2}\mu_{1}^T\Sigma^{-1}\mu_{1} - \log{\left(\frac{1-\phi}{\phi}\right)}
+\end{align*}
+
 \end{answer}

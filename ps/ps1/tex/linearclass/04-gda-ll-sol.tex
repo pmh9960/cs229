@@ -1,2 +1,53 @@
 \begin{answer}
+\begin{align*}
+    \ell(\phi, \mu_{0}, \mu_{1}, \Sigma) =& \sum_{i=1}^n \log p(x^{(i)} | y^{(i)}; \mu_{0}, \mu_{1}, \Sigma) p(y^{(i)}; \phi) \\
+    =& \sum_{i=1}^n \log p(x^{(i)} | y^{(i)}; \mu_{0}, \mu_{1}, \Sigma) + \sum_{i=1}^n \log p(y^{(i)}; \phi) \\
+    =& \sum_{i=1}^n 1\{y^{(i)}=0\}\log p(x^{(i)} | y^{(i)}=0; \mu_{0}, \Sigma) \\
+    &+ \sum_{i=1}^n 1\{y^{(i)}=1\}\log p(x^{(i)} | y^{(i)}=1; \mu_{1}, \Sigma) \\
+    &+ \sum_{i=1}^n \log p(y^{(i)}; \phi)
+\end{align*}
+    
+\begin{align*}
+    \frac{\partial\ell(\phi, \mu_{0}, \mu_{1}, \Sigma)}{\partial\phi} =& \sum_{i=1}^n \frac{(\partial p(y^{(i)}; \phi))/(\partial\phi)}{p(y^{(i)}; \phi)} \\
+    =& \sum_{i=1}^n \frac{2\cdot 1\{y^{(i)}=1\} - 1}{\phi^{y^{(i)}}(1-\phi)^{1-y^{(i)}}} \\
+    =& \sum_{i=1}^n \frac{1\{y^{(i)}=1\}}{\phi} - \frac{1 - 1\{y^{(i)}=1\}}{1-\phi} \\
+    =& \frac{\left(\sum_{i=1}^n 1\{y^{(i)}=1\}\right)}{\phi} - \frac{n - \left(\sum_{i=1}^n 1\{y^{(i)}=1\}\right)}{1-\phi} = 0 \\
+    \phi =& \frac{1}{n} \sum_{i=1}^n 1\{y^{(i)}=1\}
+\end{align*}
+\begin{align*}
+    \frac{\partial\ell(\phi, \mu_{0}, \mu_{1}, \Sigma)}{\partial\mu_{0}} =& \frac{\partial}{\partial\mu_{0}} \sum_{i=1}^n 1\{y^{(i)}=0\}\log p(x^{(i)} | y^{(i)}=0; \mu_{0}, \Sigma) \\
+    =& \frac{\partial}{\partial\mu_{0}} \sum_{i=1}^n 1\{y^{(i)}=0\} \left(-\frac{1}{2}(x^{(i)}-\mu_{0})^T\Sigma^{-1}(x^{(i)}-\mu_{0})\right) \\
+    =& -\frac{1}{2}\sum_{i=1}^n 1\{y^{(i)}=0\} \frac{\partial}{\partial\mu_{0}} 
+    \sum_{p=1}^n \sum_{q=1}^n \Sigma^{-1}_{pq} (x^{(i)}-\mu_{0})_p (x^{(i)}-\mu_{0})_q \\
+    =& -\frac{1}{2}\sum_{i=1}^n 1\{y^{(i)}=0\} \frac{\partial}{\partial\mu_{0}} 
+    \sum_{p=1}^n \sum_{q=1}^n \Sigma^{-1}_{pq} (x^{(i)}_p x^{(i)}_q - x^{(i)}_p\mu_{0q} - x^{(i)}_q\mu_{0p} + \mu_{0p}\mu_{0q}) \\
+    =& -\frac{1}{2}\sum_{i=1}^n 1\{y^{(i)}=0\} 
+    \begin{bmatrix}
+    \frac{\partial}{\partial\mu_{01}} \\
+    \frac{\partial}{\partial\mu_{02}} \\
+    \vdots \\
+    \frac{\partial}{\partial\mu_{0n}} \\
+    \end{bmatrix} 
+    \sum_{p=1}^n \sum_{q=1}^n \textrm{(same as above)} \\
+    =& -\frac{1}{2}\sum_{i=1}^n 1\{y^{(i)}=0\} 
+    \begin{bmatrix}
+    2\sum_{q=1}^n \Sigma_{1q}^{-1} (\mu_{0q} - x^{(i)}_q) \\
+    2\sum_{q=1}^n \Sigma_{2q}^{-1} (\mu_{0q} - x^{(i)}_q) \\
+    \vdots \\
+    2\sum_{q=1}^n \Sigma_{nq}^{-1} (\mu_{0q} - x^{(i)}_q) \\
+    \end{bmatrix} \\
+    =& \sum_{i=1}^n 1\{y^{(i)}=0\} \Sigma^{-1} \cdot (x^{(i)} - \mu_{0}) \\
+    =& \Sigma^{-1} \cdot \sum_{i=1}^n 1\{y^{(i)}=0\} (x^{(i)} - \mu_{0}) = 0 \\
+    \mu_{0} =& \frac{1}{n}\sum_{i=1}^n 1\{y^{(i)}=0\} x^{(i)} \\
+    \textrm{(I.S.W.) } \mu_{1} =& \frac{1}{n}\sum_{i=1}^n 1\{y^{(i)}=1\} x^{(i)}
+\end{align*}
+\begin{align*}
+    \frac{\partial\ell(\phi, \mu_{0}, \mu_{1}, \Sigma)}{\partial\Sigma} 
+    =& \frac{\partial}{\partial\Sigma}
+    \sum_{i=1}^n 1\{y^{(i)}=0\}\log p(x^{(i)} | y^{(i)}=0; \mu_{0}, \Sigma) \\
+    &+ \frac{\partial}{\partial\Sigma} 
+    \sum_{i=1}^n 1\{y^{(i)}=1\}\log p(x^{(i)} | y^{(i)}=1; \mu_{1}, \Sigma) \\
+    &= ??? \\
+    & \textrm{What are } \frac{\partial|\Sigma|}{\partial\Sigma}, \frac{\partial\Sigma^{-1}}{\partial\Sigma}
+\end{align*}
 \end{answer}
